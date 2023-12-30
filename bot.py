@@ -26,10 +26,9 @@ print("Let's log in to your Venmo account.")
 venmo_email = input('Email: ')
 venmo_password = input('Password: ')
 
-print("Now let's enter what range to download.")
-month = input('Month (enter as number, as in 6 for June): ')
-year = input('Year: ')
-print('\nGenerating CSV and calculating tithing...\n')
+print("\nNow let's enter what range to download (must be 2022 and after).")
+start_date = input('Start date (i.e. 2022-12-25): ')
+end_date = input('End data (i.e. 2022-12-25): ')
 
 # Selenium - Download CSV for month
 
@@ -37,6 +36,7 @@ driver = webdriver.Chrome()
 
 # Hit a simple venmo url to get an access token
 driver.get("https://account.venmo.com/settings/security")
+
 email_input = driver.find_element(By.ID, 'email')
 email_input.send_keys(venmo_email)
 email_input.send_keys(Keys.ENTER)
@@ -48,37 +48,40 @@ password_input.send_keys(Keys.ENTER)
 sleep(5)  # Wait for login to complete
 
 # Now that you have credentials, grab the csv file you want
-driver.get(f'https://account.venmo.com/api/statement/download?startDate=2022-01-01&endDate=2023-08-31&csv=true&profileId=2806426909016064864&accountType=personal')
+driver.get(
+    f'https://account.venmo.com/api/statement/download?startDate={start_date}&endDate={end_date}&csv=true&profileId=2806426909016064864&accountType=personal')
+sleep(5)  # Wait for download to complete
 
 driver.close()
 
 # CSV - Calculate tithing
 
-# transaction_history_csv = '~/Downloads/transaction_history.csv'
-# transaction_history_csv = os.path.expanduser(transaction_history_csv)
+print('\nGenerating CSV and calculating tithing...\n')
 
-# income = []
+transaction_history_csv = '~/Downloads/transaction_history.csv'
+transaction_history_csv = os.path.expanduser(transaction_history_csv)
 
-# with open(transaction_history_csv, 'r') as csv_file:
-#     reader = csv.reader(csv_file)
+income = []
 
-#     # Skip the first 4 rows of metadata
-#     for _ in range(4):
-#         next(reader)
+with open(transaction_history_csv, 'r') as csv_file:
+    reader = csv.reader(csv_file)
 
-#     TOTAL_AMOUNT_COL = 8
-#     for row in reader:
-#         if row[TOTAL_AMOUNT_COL] == '':  # Skip over empty cells
-#             continue
+    # Skip the first 4 rows of metadata
+    for _ in range(4):
+        next(reader)
 
-#         transaction_amount = currency_to_float(row[TOTAL_AMOUNT_COL])
-#         if transaction_amount > 0:  # Only add income
-#             income.append(transaction_amount)
+    TOTAL_AMOUNT_COL = 8
+    for row in reader:
+        if row[TOTAL_AMOUNT_COL] == '':  # Skip over empty cells
+            continue
 
-# total_income = sum(income)
-# tithing = calculate_tithing(total_income)
+        transaction_amount = currency_to_float(row[TOTAL_AMOUNT_COL])
+        if transaction_amount > 0:  # Only add income
+            income.append(transaction_amount)
 
-# print()
-# print(f'Total income for {month}/{year}:', float_to_currency(total_income))
-# print(f'Total tithing for {month}/{year}:',
-#       float_to_currency(tithing))
+total_income = sum(income)
+tithing = calculate_tithing(total_income)
+
+print(f'Range: {start_date} - {end_date}')
+print(f'Total income:', float_to_currency(total_income))
+print(f'Total tithing:', float_to_currency(tithing))
