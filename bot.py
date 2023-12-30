@@ -1,11 +1,10 @@
-import requests
-from selenium import webdriver
+from json import loads
 from time import sleep
+import getpass
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-import csv
-import os
-import pandas as pd
 
 
 def currency_to_float(currency_str):
@@ -20,19 +19,24 @@ def calculate_tithing(income):
     return income * 0.1
 
 
-print('Welcome to the Venmo tithing calculator!\n')
+print('\nWelcome to the Venmo tithing calculator!\n')
 
-print("Let's log in to your Venmo account.")
-venmo_email = input('Email: ')
-venmo_password = input('Password: ')
+print("Log in to your Venmo account")
+venmo_email = input('Email:\t\t')
+venmo_password = getpass.getpass('Password:\t')
 
-print("\nNow let's enter what range to download (must be 2022 and after).")
-start_date = input('Start date (i.e. 2022-12-25): ')
-end_date = input('End data (i.e. 2022-12-25): ')
+print("\nEnter what range to download (must be 2022 and after)")
+start_date = input('Start date (i.e. 2022-12-25):\t')
+end_date = input('End date (i.e. 2022-12-25):\t')
 
-# Selenium - Download CSV for month
+print('\nGetting venmo transactions...\n')
 
-driver = webdriver.Chrome()
+# Selenium - Login to access credentials for API
+
+chrome_options = Options()
+chrome_options.headless = True
+# driver = webdriver.Chrome()
+driver = webdriver.Chrome(options=chrome_options)
 
 # Hit a simple venmo url to get an access token
 driver.get("https://account.venmo.com/settings/security")
@@ -47,41 +51,29 @@ password_input.send_keys(Keys.ENTER)
 
 sleep(5)  # Wait for login to complete
 
-# Now that you have credentials, grab the csv file you want
-driver.get(
-    f'https://account.venmo.com/api/statement/download?startDate={start_date}&endDate={end_date}&csv=true&profileId=2806426909016064864&accountType=personal')
-sleep(5)  # Wait for download to complete
+# Now that you have credentials, get data from the API
+transactions_url = f'https://account.venmo.com/api/statement/download?startDate={start_date}&endDate={end_date}'
+driver.get(transactions_url)
+sleep(2)
+json_string = driver.find_element(By.TAG_NAME, 'pre').text
+response = loads(json_string)
 
 driver.close()
 
-# CSV - Calculate tithing
+# Calculate tithing from json
 
-print('\nGenerating CSV and calculating tithing...\n')
+print('Calculating tithing...\n')
 
-transaction_history_csv = '~/Downloads/transaction_history.csv'
-transaction_history_csv = os.path.expanduser(transaction_history_csv)
-
+transactions = response['data']['transactions']
 income = []
 
-with open(transaction_history_csv, 'r') as csv_file:
-    reader = csv.reader(csv_file)
-
-    # Skip the first 4 rows of metadata
-    for _ in range(4):
-        next(reader)
-
-    TOTAL_AMOUNT_COL = 8
-    for row in reader:
-        if row[TOTAL_AMOUNT_COL] == '':  # Skip over empty cells
-            continue
-
-        transaction_amount = currency_to_float(row[TOTAL_AMOUNT_COL])
-        if transaction_amount > 0:  # Only add income
-            income.append(transaction_amount)
+for transaction in transactions:
+    if transaction['balance_increase']:
+        income.append(transaction['amount'])
 
 total_income = sum(income)
 tithing = calculate_tithing(total_income)
 
-print(f'Range: {start_date} - {end_date}')
-print(f'Total income:', float_to_currency(total_income))
-print(f'Total tithing:', float_to_currency(tithing))
+print('Range:\t\t' + f'{start_date} to {end_date}')
+print(f'Income:\t\t' + float_to_currency(total_income))
+print(f'Tithing:\t' + float_to_currency(tithing))
