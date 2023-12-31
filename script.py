@@ -20,8 +20,8 @@ def main():
     venmo_password = required_input('Password:\t', is_password=True)
 
     print("\nEnter what range to download (must be 2022 and after)")
-    start_date = required_input('Start date (i.e. 2022-12-25):\t')
-    end_date = required_input('End date (i.e. 2022-12-25):\t')
+    start_date = required_input('Start date (YYYY-MM-DD):\t')
+    end_date = required_input('End date (YYYY-MM-DD):\t\t')
     range_str = f'from {start_date} to {end_date}'
 
     print('\nGetting venmo transactions and calculating tithing (this will take serveral seconds)...\n')
