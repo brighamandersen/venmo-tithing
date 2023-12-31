@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>venmo-tithing results</title>
+  </head>
+  <body>
+    <h2>venmo-tithing results</h2>
+    <p>Email: {{ venmo_email }}</p>
+    <p>Range: {{ date_range_str }}</p>
+    <p>Payments to Me</p>
+    <ul>
+      {% for payment in payments_to_me %}
+      <li>{{ payment }}</li>
+      {% endfor %}
+    </ul>
+    <p>Total Income: {{ total_income }}</p>
+    <p>Tithing: {{ tithing }}</p>
+  </body>
+</html>
