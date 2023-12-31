@@ -1,4 +1,5 @@
 from getpass import getpass
+from datetime import datetime
 
 
 def required_input(prompt: str, is_password=False) -> str:
@@ -16,3 +17,8 @@ def float_to_currency(amount: float) -> str:
 
 def calculate_tithing(income: float) -> float:
     return income * 0.1
+
+
+def datetime_str_to_date_str(datetime_string: str) -> str:
+    datetime_obj = datetime.strptime(datetime_string, "%Y-%m-%dT%H:%M:%S")
+    return datetime_obj.strftime("%Y-%m-%d")

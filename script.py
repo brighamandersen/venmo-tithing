@@ -3,10 +3,10 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from utils import required_input, calculate_tithing, float_to_currency
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import sys
+from utils import required_input, calculate_tithing, float_to_currency, datetime_str_to_date_str
 
 
 TIMEOUT = 10
@@ -22,6 +22,7 @@ def main():
     print("\nEnter what range to download (must be 2022 and after)")
     start_date = required_input('Start date (i.e. 2022-12-25):\t')
     end_date = required_input('End date (i.e. 2022-12-25):\t')
+    range_str = f'from {start_date} to {end_date}'
 
     print('\nGetting venmo transactions and calculating tithing (this will take serveral seconds)...\n')
 
@@ -65,14 +66,25 @@ def main():
     transactions = response['data']['transactions']
     income = []
 
+    print(f'Payments to me {range_str}:')
+
     for transaction in transactions:
-        if transaction['balance_increase']:
-            income.append(transaction['amount'])
+        is_income = transaction['balance_increase']
+        if is_income:
+            transaction_date = datetime_str_to_date_str(
+                transaction["payment"]["date_created"])
+            transaction_amount = transaction['amount']
+            transaction_actor_name = transaction["payment"]["actor"]["display_name"]
+            transaction_note = transaction['note']
+
+            print(
+                f'{transaction_date}: {float_to_currency(transaction_amount)} from {transaction_actor_name} for {transaction_note}')
+            income.append(transaction_amount)
 
     total_income = sum(income)
     tithing = calculate_tithing(total_income)
 
-    print('Range:\t\t' + f'{start_date} to {end_date}')
+    print(f'\nTotals {range_str}:')
     print(f'Income:\t\t' + float_to_currency(total_income))
     print(f'Tithing:\t' + float_to_currency(tithing))
 
