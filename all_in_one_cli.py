@@ -53,17 +53,24 @@ def main():
             'Error occurred while logging in. Check your username and password and try again.')
         sys.exit(1)
 
-    # Now that you have credentials, get data from the API
+    # Now that you have credentials, get transactions from the API
+    transactions = []
     driver.get(
         f'https://account.venmo.com/api/statement/download?startDate={start_date}&endDate={end_date}')
-    json_string = driver.find_element(By.TAG_NAME, 'pre').text
-    response = loads(json_string)
+    try:
+        json_string = driver.find_element(By.TAG_NAME, 'pre').text
+        response = loads(json_string)
+        transactions = response['data']['transactions']
+    except:
+        driver.quit()
+        print(
+            'Error occurred while scraping transactions. Check your start and end dates and try again.')
+        sys.exit(1)
 
     driver.quit()
 
     # Calculate tithing from json
 
-    transactions = response['data']['transactions']
     income = []
 
     print(f'Payments to me {range_str}:')

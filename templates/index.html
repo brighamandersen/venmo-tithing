@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>venmo-tithing</title>
+  </head>
+  <body>
+    <h2>venmo-tithing</h2>
+    <form method="post" action="{{ url_for('results') }}">
+      <label for="venmo-email">Email:</label>
+      <input type="email" id="venmo-email" name="venmo-email" required />
+      <label for="venmo-password">Password:</label>
+      <input
+        type="password"
+        id="venmo-password"
+        name="venmo-password"
+        required
+      />
+      <label for="start-date">Start Date:</label>
+      <input type="date" id="start-date" name="start-date" required />
+      <label for="end-date">End Date:</label>
+      <input type="date" id="end-date" name="end-date" required />
+      <button type="submit">Login</button>
+    </form>
+  </body>
+</html>
