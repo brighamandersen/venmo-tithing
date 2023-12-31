@@ -1,13 +1,5 @@
-from json import loads
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-import sys
 from utils import required_input, get_date_range_str, float_to_currency, process_transactions
-from venmo_bot import VenmoBot
+from bot import VenmoBot
 
 
 def main():
