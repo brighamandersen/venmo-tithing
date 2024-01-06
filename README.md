@@ -2,5 +2,5 @@ This script helps you figure out how much income you made via Venmo over whateve
 
 2 ways to use
 
-1. CLI (cli.py)
+1. CLI (`python cli.py`)
 2. Website (app.py)
