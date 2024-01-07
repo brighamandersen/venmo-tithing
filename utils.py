@@ -16,15 +16,16 @@ def float_to_currency(amount: float) -> str:
 
 
 def calculate_tithing(income: float) -> float:
-    return income * 0.1
+    TITHING_PERCENTAGE = 0.1
+    return income * TITHING_PERCENTAGE
 
 
-def datetime_str_to_date_str(datetime_string: str) -> str:
+def datetime_to_date(datetime_string: str) -> str:
     datetime_obj = datetime.strptime(datetime_string, "%Y-%m-%dT%H:%M:%S")
     return datetime_obj.strftime("%Y-%m-%d")
 
 
-def get_date_range_str(start_date: str, end_date: str) -> str:
+def stringify_date_range(start_date: str, end_date: str) -> str:
     return f'from {start_date} to {end_date}'
 
 
@@ -35,7 +36,7 @@ def process_transactions(transactions: list) -> tuple:
     for transaction in transactions:
         is_income = transaction['balance_increase']
         if is_income:
-            transaction_date = datetime_str_to_date_str(
+            transaction_date = datetime_to_date(
                 transaction["payment"]["date_created"])
             transaction_amount = transaction['amount']
             transaction_actor_name = transaction["payment"]["actor"]["display_name"]

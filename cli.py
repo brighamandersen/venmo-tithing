@@ -1,4 +1,4 @@
-from utils import required_input, get_date_range_str, float_to_currency, process_transactions
+from utils import required_input, stringify_date_range, float_to_currency, process_transactions
 from bot import VenmoBot
 
 
@@ -12,7 +12,7 @@ def main():
     print("\nEnter what range to download (must be 2022 and after)")
     start_date = required_input('Start date (YYYY-MM-DD):\t')
     end_date = required_input('End date (YYYY-MM-DD):\t\t')
-    date_range_str = get_date_range_str(start_date, end_date)
+    date_range_string = stringify_date_range(start_date, end_date)
 
     # Login, scrape, and process transactions
     bot = VenmoBot()
@@ -23,10 +23,10 @@ def main():
     payments_to_me, total_income, tithing = process_transactions(transactions)
 
     # Display results
-    print(f'Payments to me {date_range_str}:')
+    print(f'Payments to me {date_range_string}:')
     for payment in payments_to_me:
         print(payment)
-    print(f'\nTotals {date_range_str}:')
+    print(f'\nTotals {date_range_string}:')
     print(f'Income:\t\t' + float_to_currency(total_income))
     print(f'Tithing:\t' + float_to_currency(tithing))
 
