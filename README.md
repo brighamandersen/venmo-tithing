@@ -12,7 +12,7 @@ I love doing coding projects that actually have real-world application. Even if 
 
 ### The Ideal Solution
 
-The ideal solution would be to get transaction data from Venmo's API, but after extensive research, the Venmo API is no longer available for public use. This made my job much more difficult. However, I wanted an automatic solution, so then I tried scraping data from Venmo's website using Selenium, but apparently Venmo discourages that because they locked me out of my account for a few days. It was quite tragic because at that point I had fully finished the script to grab all the data and perform all the calculations. If you're interested to see that solution, see the [archive/bot.py](archive/bot.py) file here in this repo to see that code.
+The ideal solution would be to get transaction data from Venmo's API, but after extensive research, the Venmo API is no longer available for public use. This made my job much more difficult. However, I wanted an automatic solution, so then I tried scraping data from Venmo's website using Selenium, but apparently Venmo discourages that because they locked me out of my account for a few days. It was quite tragic because at that point I had fully finished the script to grab all the data and perform all the calculations. If you're interested to see that solution, see the [archive/ folder](archive) (particularly [`main.py`](archive/main.py) and [`bot.py`](archive/bot.py)) file here in this repo to see that code.
 
 ### The Workaround Solution
 

@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for
-from bot import VenmoBot
+from archive.bot import VenmoBot
 from utils import process_transactions, float_to_currency, stringify_date_range
 
 app = Flask(__name__)

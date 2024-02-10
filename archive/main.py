@@ -1,5 +1,5 @@
 from utils import required_input, stringify_date_range, float_to_currency, process_transactions
-from bot import VenmoBot
+from archive.bot import VenmoBot
 
 
 def main():
