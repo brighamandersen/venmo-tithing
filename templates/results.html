@@ -30,7 +30,7 @@
         background-color: #f2f2f2;
       }
 
-      .results {
+      .section {
         margin-bottom: 2rem;
       }
 
@@ -60,17 +60,17 @@
     </nav>
     <div class="results">
       {% if username %}
-      <div class="username">
+      <div class="section username">
         <h3>Username</h3>
         <p>{{ username }}</p>
       </div>
       {% endif %} {% if time_range %}
-      <div class="time-range">
+      <div class="section time-range">
         <h3>Time Range</h3>
         <p>{{ time_range }}</p>
       </div>
       {% endif %} {% if income_transactions %}
-      <div class="income-transactions">
+      <div class="section income-transactions">
         <h3>Income Transactions</h3>
         <table>
           <thead>
@@ -87,19 +87,19 @@
               <td>{{ transaction.date }}</td>
               <td>{{ transaction.description }}</td>
               <td>{{ transaction.payer }}</td>
-              <td>{{ transaction.amount }}</td>
+              <td>{{ transaction.amount_str }}</td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
       {% endif %} {% if total_income_str %}
-      <div class="total-income">
+      <div class="section total-income">
         <h3>Total Income</h3>
         <p class="key-amount">{{ total_income_str }}</p>
       </div>
       {% endif %} {% if tithing_str %}
-      <div class="tithing">
+      <div class="section tithing">
         <h3>Tithing</h3>
         <div class="tithing-line">
           <p class="key-amount">{{ tithing_str }}</p>
