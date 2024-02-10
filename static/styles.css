@@ -12,9 +12,6 @@
   font-family: 'Scto Grotesk A';
   src: url('https://db.onlinewebfonts.com/t/c1dadd1119436dde0f9ab3c947d1e62f.woff')
     format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
 }
 
 html {
@@ -30,4 +27,24 @@ h1 {
   font-size: 2rem;
   font-weight: bold;
   color: var(--primary);
+}
+
+button {
+  background-color: var(--primary);
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  font-size: 18px;
+  border-radius: 2rem;
+}
+
+a {
+  color: var(--primary);
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
