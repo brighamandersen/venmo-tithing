@@ -1,7 +1,7 @@
-from flask import Flask, flash, get_flashed_messages, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session
 import csv
 import os
-from utils import calculate_tithing, currency_str_to_float, datetime_to_date, float_to_currency, stringify_income_transaction
+from utils import calculate_tithing, currency_str_to_float, datetime_to_date, extract_username_and_time_range, float_to_currency
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')
@@ -14,12 +14,16 @@ def index():
 
 @app.route('/results', methods=['GET'])
 def results():
+    username = session.get('username')
+    time_range = session.get('time_range')
     income_transactions = session.get('income_transactions')
     total_income_str = session.get('total_income_str')
     tithing_str = session.get('tithing_str')
 
     return render_template(
         'results.html',
+        username=username,
+        time_range=time_range,
         income_transactions=income_transactions,
         total_income_str=total_income_str,
         tithing_str=tithing_str
@@ -40,8 +44,15 @@ def process_csv():
     with open(tmp_csv, 'r') as csv_file:
         reader = csv.reader(csv_file)
 
-        # Skip the first 4 rows of metadata
-        for _ in range(4):
+        # Grab metadata from first row
+        first_row = next(reader)
+        first_cell = first_row[0]
+        session['csv_metadata'] = first_row[0]
+        session['username'], session['time_range'] = extract_username_and_time_range(
+            first_cell)
+        print('TIM', session['time_range'])
+        # Skip over the next 3 rows
+        for _ in range(3):
             next(reader)
 
         PAYMENT_DATE_COLUMN_INDEX = 2
