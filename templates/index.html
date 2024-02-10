@@ -3,56 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>venmo-tithing</title>
-    <style>
-      input {
-        width: 200px;
-      }
-    </style>
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='favicon.svg') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <title>Venmo Tithing Calculator</title>
+    <style></style>
   </head>
   <body>
-    <h2>Venmo Tithing Calculator</h2>
-    <div class="input">
-      <h3>Input</h3>
-      <form
-        action="{{ url_for('process_csv') }}"
-        enctype="multipart/form-data"
-        method="post"
-      >
-        <label for="transactions-csv">CSV:</label>
-        <input
-          type="file"
-          id="transactions-csv"
-          name="transactions-csv"
-          accept=".csv"
-        />
-        <br />
-        <input type="submit" value="Calculate" />
-      </form>
-    </div>
-    <div class="output">
-      <h3>Income Transactions</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Payer</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for transaction in income_transactions %}
-          <tr>
-            <td>{{ transaction.date }}</td>
-            <td>{{ transaction.description }}</td>
-            <td>{{ transaction.payer }}</td>
-            <td>{{ transaction.amount }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      <h3>Total Income: {{ total_income_str }}</h3>
-      <h3>Tithing: {{ tithing_str }}</h3>
+    <h1>venmo tithing calculator</h1>
+    <p>Step 1: Download your Venmo transactions as a CSV file.</p>
+    <form
+      action="{{ url_for('process_csv') }}"
+      enctype="multipart/form-data"
+      method="post"
+    >
+      <label for="transactions-csv">CSV:</label>
+      <input
+        type="file"
+        id="transactions-csv"
+        name="transactions-csv"
+        accept=".csv"
+        required
+      />
+      <br />
+      <input type="submit" value="Calculate" />
+    </form>
   </body>
 </html>

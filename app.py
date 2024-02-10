@@ -1,15 +1,29 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, flash, get_flashed_messages, render_template, request, redirect, url_for, session
 import csv
 import os
 from utils import calculate_tithing, currency_str_to_float, datetime_to_date, float_to_currency, stringify_income_transaction
 
 app = Flask(__name__)
-app.config['DEBUG'] = True
+app.secret_key = os.getenv('SECRET_KEY')
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
+
+
+@app.route('/results', methods=['GET'])
+def results():
+    income_transactions = session.get('income_transactions')
+    total_income_str = session.get('total_income_str')
+    tithing_str = session.get('tithing_str')
+
+    return render_template(
+        'results.html',
+        income_transactions=income_transactions,
+        total_income_str=total_income_str,
+        tithing_str=tithing_str
+    )
 
 
 @app.route('/process-csv', methods=['POST'])
@@ -21,8 +35,8 @@ def process_csv():
     tmp_csv = '/tmp/transaction_history.csv'
     transaction_history_csv.save(tmp_csv)
 
+    # Process csv to populate income_transactions
     income_transactions = []
-
     with open(tmp_csv, 'r') as csv_file:
         reader = csv.reader(csv_file)
 
@@ -48,21 +62,21 @@ def process_csv():
                     'amount': transaction_amount
                 })
 
-        # Remove the temporary file
-        os.remove(tmp_csv)
+    # Remove the temporary file
+    os.remove(tmp_csv)
 
-    # Print each income transaction
-    for transaction in income_transactions:
-        print(stringify_income_transaction(transaction))
-
-    # Print total income
+    # Make calculations
     total_income = sum(transaction['amount']
                        for transaction in income_transactions)
-    total_income_str = float_to_currency(total_income)
-
-    # Print total tithing
     tithing = calculate_tithing(total_income)
-    tithing_str = float_to_currency(tithing)
 
-    # return redirect(url_for('index'))
-    return render_template('index.html', income_transactions=income_transactions, total_income_str=total_income_str, tithing_str=tithing_str)
+    # Save data to session to use in index
+    session['income_transactions'] = income_transactions
+    session['total_income_str'] = float_to_currency(total_income)
+    session['tithing_str'] = float_to_currency(tithing)
+
+    return redirect(url_for('results'))
+
+
+if __name__ == '__main__':
+    app.run()

@@ -17,3 +17,12 @@ The ideal solution would be to get transaction data from Venmo's API, but after 
 ### The Workaround Solution
 
 While I was saddened to see that I couldn't achieve a fully automated solution, I wanted to give my mom something she could use, so I went ahead and found the most hassle-free solution. It's a website that has you log into venmo and then download your transactions for the pay period you're interested in, then you just drag and drop the CSV into my website and it does the rest. It will scan the CSV and pull out all the relevant data then perform the calculations. You'll then see a list of your transactions that produced income, the total amount of income you made, and how much tithing to pay! 💰
+
+### Development
+
+1. Get the secret key, then save it in a `.env` in the root of this project.
+
+2. Run flask
+   ```
+   flask run --debug
+   ```
