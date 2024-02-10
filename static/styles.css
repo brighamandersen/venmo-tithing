@@ -1,0 +1,33 @@
+:root {
+  --primary: #0074de;
+}
+
+@font-face {
+  font-family: 'Ronnia Extrabold Italic';
+  src: url('https://db.onlinewebfonts.com/t/da33c3569757096031afceba6d88ec03.woff')
+    format('woff');
+}
+
+@font-face {
+  font-family: 'Scto Grotesk A';
+  src: url('https://db.onlinewebfonts.com/t/c1dadd1119436dde0f9ab3c947d1e62f.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  font-family: 'Scto Grotesk A';
+}
+
+h1 {
+  font-family: 'Ronnia Extrabold Italic';
+  color: var(--primary);
+}
+
+.key-amount {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary);
+}
