@@ -41,6 +41,7 @@ def process_csv():
 
     # Process csv to populate income_transactions
     income_transactions = []
+    total_income = 0
     with open(tmp_csv, 'r') as csv_file:
         reader = csv.reader(csv_file)
 
@@ -50,7 +51,6 @@ def process_csv():
         session['csv_metadata'] = first_row[0]
         session['username'], session['time_range'] = extract_username_and_time_range(
             first_cell)
-        print('TIM', session['time_range'])
         # Skip over the next 3 rows
         for _ in range(3):
             next(reader)
@@ -66,19 +66,18 @@ def process_csv():
             transaction_amount = currency_str_to_float(
                 row[TOTAL_AMOUNT_COLUMN_INDEX])
             if transaction_amount > 0:  # Only add income
+                total_income += transaction_amount
                 income_transactions.append({
                     'date': datetime_to_date(row[PAYMENT_DATE_COLUMN_INDEX]),
                     'description': row[PAYMENT_DESCRIPTION_COLUMN_INDEX],
                     'payer': row[PAYER_NAME_COLUMN_INDEX],
-                    'amount': transaction_amount
+                    'amount_str': float_to_currency(transaction_amount)
                 })
 
     # Remove the temporary file
     os.remove(tmp_csv)
 
-    # Make calculations
-    total_income = sum(transaction['amount']
-                       for transaction in income_transactions)
+    # Make tithing calculation
     tithing = calculate_tithing(total_income)
 
     # Save data to session to use in index
