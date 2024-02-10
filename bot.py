@@ -13,7 +13,7 @@ class VenmoBot():
         self.TIMEOUT = 10
 
         chrome_options = Options()
-        chrome_options.add_argument("--headless")
+        # chrome_options.add_argument("--headless")
         self.driver = webdriver.Chrome(options=chrome_options)
 
     def kill_bot(self, exit_code=0):
