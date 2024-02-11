@@ -13,45 +13,65 @@
     />
     <title>Venmo Tithing Calculator</title>
     <style>
+      .step-one,
+      .step-two,
       .step-one-screenshot {
         width: 100%;
-        border-radius: 8px;
+      }
+
+      .step-one-screenshot-caption {
+        margin-top: 0.5rem;
       }
 
       .step-one-details,
       .step-two-details {
         margin: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
 
       .calculate-tithing-button {
         margin-top: 1rem;
         margin-bottom: 1rem;
       }
+
+      .csv-dropzone {
+        background-color: white;
+        padding: 2rem;
+        margin: 1rem;
+        border: 2px dashed var(--primary);
+      }
+
+      .csv-dropzone:hover {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      }
     </style>
   </head>
   <body>
-    <h1>venmo tithing calculator</h1>
+    <nav class="navbar drop-shadow">
+      <h1><a href="/">Venmo Tithing Calculator</a></h1>
+    </nav>
     <div class="breadcrumbs">
-      <a href="/" class="active">Instructions</a> /
-      <a href="/results">Results</a>
+      <a href="/" class="active">Instructions</a>
     </div>
     <main>
-      <h3>Instructions</h3>
       <div class="step-one">
-        <p>
+        <h3>
           Step 1:
           <a href="https://account.venmo.com/statement"
             >Download your Venmo transactions</a
           >
           as a CSV file.
-        </p>
-        <div class="step-one-details">
+        </h3>
+        <figure class="step-one-details">
           <img
             src="{{ url_for('static', filename='venmo-screenshot.png') }}"
             alt="Venmo Screenshoot"
-            class="step-one-screenshot drop-shadow"
+            class="step-one-screenshot drop-shadow rounded-corners"
           />
-          <p>
+          <figcaption class="step-one-screenshot-caption">
             Visit
             <a href="https://account.venmo.com/statement"
               >https://account.venmo.com/statement</a
@@ -59,17 +79,18 @@
             "Account Statement" screen, where you can select the month you want
             to download. Then hit "Download CSV" and it will download to your
             computer.
-          </p>
-        </div>
+          </figcaption>
+        </figure>
       </div>
       <div class="step-two">
-        <p>Step 2: Upload the CSV you just downloaded below!</p>
-        <div class="step-two-details">
-          <form
-            action="{{ url_for('process_csv') }}"
-            enctype="multipart/form-data"
-            method="post"
-          >
+        <h3>Step 2: Upload the CSV you just downloaded below!</h3>
+        <form
+          class="step-two-details"
+          action="{{ url_for('process_csv') }}"
+          enctype="multipart/form-data"
+          method="post"
+        >
+          <div class="csv-dropzone rounded-corners">
             <label for="transactions-csv">CSV:</label>
             <input
               type="file"
@@ -77,13 +98,17 @@
               name="transactions-csv"
               accept=".csv"
               required
+              onchange="document.querySelector('.calculate-tithing-button').disabled = false;"
             />
-            <br />
-            <button type="submit" class="button calculate-tithing-button">
-              Calculate Tithing
-            </button>
-          </form>
-        </div>
+          </div>
+          <button
+            type="submit"
+            disabled
+            class="button calculate-tithing-button"
+          >
+            Calculate Tithing
+          </button>
+        </form>
       </div>
     </main>
   </body>
