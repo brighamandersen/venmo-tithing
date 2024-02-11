@@ -45,6 +45,10 @@
         margin-bottom: 2rem;
       }
 
+      .results {
+        margin-bottom: 4rem;
+      }
+
       .key-amount {
         font-size: 2rem;
         font-weight: 900;
@@ -67,6 +71,10 @@
   </head>
   <body>
     <h1>venmo tithing calculator</h1>
+    <div class="breadcrumbs">
+      <a href="/">Instructions</a> /
+      <a href="/results" class="active">Results</a>
+    </div>
     <main>
       <div class="results">
         {% if username %}
