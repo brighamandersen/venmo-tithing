@@ -15,7 +15,6 @@
     <style>
       .step-one-screenshot {
         width: 100%;
-        margin: 1rem;
         border-radius: 8px;
       }
 
@@ -32,10 +31,20 @@
   </head>
   <body>
     <h1>venmo tithing calculator</h1>
+    <div class="breadcrumbs">
+      <a href="/" class="active">Instructions</a> /
+      <a href="/results">Results</a>
+    </div>
     <main>
       <h3>Instructions</h3>
       <div class="step-one">
-        <p>Step 1: Download your Venmo transactions as a CSV file.</p>
+        <p>
+          Step 1:
+          <a href="https://account.venmo.com/statement"
+            >Download your Venmo transactions</a
+          >
+          as a CSV file.
+        </p>
         <div class="step-one-details">
           <img
             src="{{ url_for('static', filename='venmo-screenshot.png') }}"

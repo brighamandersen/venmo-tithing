@@ -81,3 +81,12 @@ nav a:hover {
 .right-align {
   text-align: right;
 }
+
+.breadcrumbs {
+  color: var(--dark-gray);
+}
+
+.breadcrumbs a.active {
+  pointer-events: none;
+  color: var(--dark-gray);
+}
