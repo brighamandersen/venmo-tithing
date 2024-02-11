@@ -15,8 +15,8 @@
     <style>
       .step-one-screenshot {
         width: 100%;
-        max-width: 500px;
         margin: 1rem;
+        border-radius: 8px;
       }
 
       .step-one-details,
@@ -32,48 +32,50 @@
   </head>
   <body>
     <h1>venmo tithing calculator</h1>
-    <h3>Instructions</h3>
-    <div class="step-one">
-      <p>Step 1: Download your Venmo transactions as a CSV file.</p>
-      <div class="step-one-details">
-        <img
-          src="{{ url_for('static', filename='venmo-screenshot.png') }}"
-          alt="Venmo Screenshoot"
-          class="step-one-screenshot"
-        />
-        <p>
-          Visit
-          <a href="https://account.venmo.com/statement"
-            >https://account.venmo.com/statement</a
-          >, where you will sign into your Venmo account. Then you'll see an
-          "Account Statement" screen, where you can select the month you want to
-          download. Then hit "Download CSV" and it will download to your
-          computer.
-        </p>
-      </div>
-    </div>
-    <div class="step-two">
-      <p>Step 2: Upload the CSV you just downloaded below!</p>
-      <div class="step-two-details">
-        <form
-          action="{{ url_for('process_csv') }}"
-          enctype="multipart/form-data"
-          method="post"
-        >
-          <label for="transactions-csv">CSV:</label>
-          <input
-            type="file"
-            id="transactions-csv"
-            name="transactions-csv"
-            accept=".csv"
-            required
+    <main>
+      <h3>Instructions</h3>
+      <div class="step-one">
+        <p>Step 1: Download your Venmo transactions as a CSV file.</p>
+        <div class="step-one-details">
+          <img
+            src="{{ url_for('static', filename='venmo-screenshot.png') }}"
+            alt="Venmo Screenshoot"
+            class="step-one-screenshot drop-shadow"
           />
-          <br />
-          <button type="submit" class="button calculate-tithing-button">
-            Calculate Tithing
-          </button>
-        </form>
+          <p>
+            Visit
+            <a href="https://account.venmo.com/statement"
+              >https://account.venmo.com/statement</a
+            >, where you will sign into your Venmo account. Then you'll see an
+            "Account Statement" screen, where you can select the month you want
+            to download. Then hit "Download CSV" and it will download to your
+            computer.
+          </p>
+        </div>
       </div>
-    </div>
+      <div class="step-two">
+        <p>Step 2: Upload the CSV you just downloaded below!</p>
+        <div class="step-two-details">
+          <form
+            action="{{ url_for('process_csv') }}"
+            enctype="multipart/form-data"
+            method="post"
+          >
+            <label for="transactions-csv">CSV:</label>
+            <input
+              type="file"
+              id="transactions-csv"
+              name="transactions-csv"
+              accept=".csv"
+              required
+            />
+            <br />
+            <button type="submit" class="button calculate-tithing-button">
+              Calculate Tithing
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
   </body>
 </html>
