@@ -24,14 +24,14 @@ While I was saddened to see that I couldn't achieve a fully automated solution, 
 
 2. Run flask
 
-In development
+   In development
 
-```
-flask run --debug
-```
+   ```
+    python app.py
+   ```
 
-In prod on a server that runs constantly (you can change the port as needed)
+   In prod on a server that runs constantly (you can change the port as needed)
 
-```
-python3 -m gunicorn -w 1 --bind 0.0.0.0:5002 wsgi:app --daemon
-```
+   ```
+   python3 -m gunicorn -w 1 --bind 0.0.0.0:5002 wsgi:app --daemon
+   ```
