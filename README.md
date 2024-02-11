@@ -23,6 +23,15 @@ While I was saddened to see that I couldn't achieve a fully automated solution, 
 1. Get the secret key, then save it in a `.env` in the root of this project.
 
 2. Run flask
-   ```
-   flask run --debug
-   ```
+
+In development
+
+```
+flask run --debug
+```
+
+In prod on a server that runs constantly (you can change the port as needed)
+
+```
+python3 -m gunicorn -w 1 --bind 0.0.0.0:5002 wsgi:app --daemon
+```
