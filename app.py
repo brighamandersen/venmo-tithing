@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import csv
 import os
 from utils import calculate_tithing, currency_str_to_float, datetime_to_date, extract_username_and_time_range, float_to_currency
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')
