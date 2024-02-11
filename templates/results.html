@@ -14,7 +14,6 @@
     <title>Venmo Tithing Calculator</title>
     <style>
       .table-container {
-        border-radius: 8px;
         overflow: hidden;
         overflow-x: auto;
       }
@@ -39,6 +38,8 @@
 
       td {
         border-top: 1px solid #e0e0e0;
+        white-space: nowrap;
+        overflow: auto; /* Always show scrollbar */
       }
 
       .section {
@@ -46,6 +47,7 @@
       }
 
       .results {
+        width: 100%;
         margin-bottom: 4rem;
       }
 
@@ -70,9 +72,12 @@
     </style>
   </head>
   <body>
-    <h1>venmo tithing calculator</h1>
+    <nav class="navbar drop-shadow">
+      <h1><a href="/">Venmo Tithing Calculator</a></h1>
+    </nav>
     <div class="breadcrumbs">
-      <a href="/">Instructions</a> /
+      <a href="/">Instructions</a>
+      <span>/</span>
       <a href="/results" class="active">Results</a>
     </div>
     <main>
@@ -90,7 +95,7 @@
         {% endif %} {% if income_transactions %}
         <div class="section income-transactions">
           <h3>Income Transactions</h3>
-          <div class="table-container drop-shadow">
+          <div class="table-container drop-shadow rounded-corners">
             <table>
               <thead>
                 <tr>

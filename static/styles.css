@@ -22,6 +22,10 @@ html {
   background-color: var(--primary-light);
 }
 
+body {
+  margin: 0;
+}
+
 h1 {
   font-family: 'Ronnia Extrabold Italic';
   color: var(--primary);
@@ -31,8 +35,27 @@ h3 {
   color: var(--dark-gray);
 }
 
+.navbar {
+  background-color: white;
+}
+
+.navbar h1 {
+  margin: 0;
+  padding: 1rem;
+}
+
+.navbar h1 a {
+  text-decoration: none;
+}
+
 main {
-  margin: 2rem;
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .button {
@@ -48,34 +71,39 @@ main {
   background-color: var(--primary-hover);
 }
 
-.white-button {
+.button.white-button {
   background-color: white;
   color: var(--primary);
   border: 1px solid var(--primary);
 }
 
-.white-button:hover {
+.button.white-button:hover {
   background-color: var(--primary);
   color: white;
 }
 
+.button:disabled {
+  background-color: #d6edfd;
+  color: #5f91c3;
+  cursor: not-allowed;
+}
+
 a {
   color: var(--primary);
-  font-style: italic;
-  font-weight: bold;
   text-decoration: none;
+  font-weight: bold;
 }
 
 a:hover {
   text-decoration: underline;
 }
 
-nav a:hover {
-  text-decoration: none;
-}
-
 .drop-shadow {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.rounded-corners {
+  border-radius: 0.5rem;
 }
 
 .right-align {
@@ -83,10 +111,18 @@ nav a:hover {
 }
 
 .breadcrumbs {
+  padding: 1rem 0;
+  margin: 0 2rem;
   color: var(--dark-gray);
+  border-bottom: 1px solid #dddddd;
+}
+
+.breadcrumbs a {
+  font-style: unset;
 }
 
 .breadcrumbs a.active {
   pointer-events: none;
   color: var(--dark-gray);
+  font-weight: bold;
 }
