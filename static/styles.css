@@ -50,12 +50,11 @@ h3 {
 
 main {
   padding: 2rem;
+}
+
+.width-container {
   max-width: 600px;
-  width: 100%;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .button {
@@ -111,7 +110,6 @@ a:hover {
 }
 
 .breadcrumbs {
-  width: 100%;
   padding: 1rem 0;
   margin: 0 2rem;
   color: var(--dark-gray);
