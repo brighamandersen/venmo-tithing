@@ -94,17 +94,15 @@
             enctype="multipart/form-data"
             method="post"
           >
-            <div class="csv-dropzone rounded-corners">
-              <label for="transactions-csv">CSV:</label>
-              <input
-                accept=".csv"
-                id="transactions-csv"
-                name="transactions-csv"
-                onchange="checkIfReadyForUpload()"
-                required
-                type="file"
-              />
-            </div>
+            <input
+              accept=".csv"
+              class="csv-dropzone rounded-corners"
+              id="transactions-csv"
+              name="transactions-csv"
+              onchange="checkIfReadyForUpload()"
+              required
+              type="file"
+            />
             <button
               type="submit"
               disabled
