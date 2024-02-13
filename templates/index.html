@@ -36,7 +36,7 @@
         align-items: center;
       }
 
-      .calculate-tithing-button {
+      #calculate-tithing-button {
         margin-top: 1rem;
         margin-bottom: 1rem;
       }
@@ -97,18 +97,19 @@
             <div class="csv-dropzone rounded-corners">
               <label for="transactions-csv">CSV:</label>
               <input
-                type="file"
+                accept=".csv"
                 id="transactions-csv"
                 name="transactions-csv"
-                accept=".csv"
+                onchange="checkIfReadyForUpload()"
                 required
-                onchange="document.querySelector('.calculate-tithing-button').disabled = false;"
+                type="file"
               />
             </div>
             <button
               type="submit"
               disabled
-              class="button calculate-tithing-button"
+              class="button"
+              id="calculate-tithing-button"
             >
               Calculate Tithing
             </button>
@@ -116,5 +117,16 @@
         </div>
       </div>
     </main>
+    <script>
+      function checkIfReadyForUpload() {
+        const fileInput = document.getElementById('transactions-csv');
+        const calculateTithingButton = document.getElementById(
+          'calculate-tithing-button'
+        );
+
+        const hasFileReadyForUpload = fileInput.files.length > 0;
+        calculateTithingButton.disabled = !hasFileReadyForUpload;
+      }
+    </script>
   </body>
 </html>
