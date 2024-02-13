@@ -13,42 +13,24 @@
     />
     <title>Venmo Tithing Calculator</title>
     <style>
-      .step-one,
-      .step-two {
-        margin-bottom: 3rem;
-      }
-
       .step-one-screenshot {
         width: 100%;
       }
 
-      .step-one-screenshot-caption {
-        margin-top: 0.5rem;
-      }
-
-      .step-one-details,
-      .step-two-details {
-        margin: 2rem;
-        margin-top: 1rem;
+      .step {
+        margin: 1rem 2rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
       }
 
-      #calculate-tithing-button {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
+      .step-header {
+        text-align: center;
       }
 
-      .csv-dropzone {
-        background-color: white;
-        padding: 2rem;
-        border: 2px dashed var(--primary);
-      }
-
-      .csv-dropzone:hover {
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      .csv-input {
+        display: none;
       }
     </style>
   </head>
@@ -61,48 +43,46 @@
     </div>
     <main>
       <div class="width-container">
-        <div class="step-one">
-          <h3>
+        <div class="step step-one">
+          <h3 class="step-header">
             Step 1:
-            <a href="https://account.venmo.com/statement"
+            <a href="https://account.venmo.com/statement" target="_blank"
               >Download your Venmo transactions</a
             >
-            as a CSV file.
+            as a CSV file
           </h3>
-          <figure class="step-one-details">
+          <a href="https://account.venmo.com/statement" target="_blank">
             <img
               src="{{ url_for('static', filename='venmo-screenshot.png') }}"
               alt="Venmo Screenshoot"
               class="step-one-screenshot drop-shadow rounded-corners"
             />
-            <figcaption class="step-one-screenshot-caption">
-              Visit
-              <a href="https://account.venmo.com/statement"
-                >https://account.venmo.com/statement</a
-              >, where you will sign into your Venmo account. Then you'll see an
-              "Account Statement" screen, where you can select the month you
-              want to download. Then hit "Download CSV" and it will download to
-              your computer.
-            </figcaption>
-          </figure>
+          </a>
         </div>
-        <div class="step-two">
-          <h3>Step 2: Upload the CSV you just downloaded below!</h3>
-          <form
-            class="step-two-details"
-            action="{{ url_for('process_csv') }}"
-            enctype="multipart/form-data"
-            method="post"
-          >
+        <form
+          action="{{ url_for('process_csv') }}"
+          enctype="multipart/form-data"
+          method="post"
+        >
+          <div class="step step-two">
+            <h3 class="step-header">Step 2: Upload the downloaded CSV below</h3>
             <input
               accept=".csv"
-              class="csv-dropzone rounded-corners"
-              id="transactions-csv"
-              name="transactions-csv"
+              class="csv-input"
+              id="csv-input"
+              name="csv-input"
               onchange="checkIfReadyForUpload()"
               required
               type="file"
             />
+            <label for="csv-input" class="button" id="choose-file-button"
+              >Choose File</label
+            >
+          </div>
+          <div class="step step-three">
+            <h3 class="step-header">
+              Step 3: Calculate tithing on your Venmo income
+            </h3>
             <button
               type="submit"
               disabled
@@ -111,19 +91,41 @@
             >
               Calculate Tithing
             </button>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </main>
     <script>
-      function checkIfReadyForUpload() {
-        const fileInput = document.getElementById('transactions-csv');
-        const calculateTithingButton = document.getElementById(
-          'calculate-tithing-button'
-        );
+      const csvInput = document.getElementById('csv-input');
+      const chooseFileButton = document.getElementById('choose-file-button');
+      const calculateTithingButton = document.getElementById(
+        'calculate-tithing-button'
+      );
 
-        const hasFileReadyForUpload = fileInput.files.length > 0;
-        calculateTithingButton.disabled = !hasFileReadyForUpload;
+      // Drag and drop functionality
+      chooseFileButton.addEventListener('dragenter', function (event) {
+        event.preventDefault();
+      });
+      chooseFileButton.addEventListener('dragover', function (event) {
+        event.preventDefault();
+      });
+      chooseFileButton.addEventListener('drop', function (event) {
+        event.preventDefault();
+        csvInput.files = event.dataTransfer.files;
+        checkIfReadyForUpload();
+      });
+
+      function checkIfReadyForUpload() {
+        const hasFileReadyForUpload = csvInput.files.length > 0;
+        if (hasFileReadyForUpload) {
+          calculateTithingButton.disabled = false;
+          chooseFileButton.textContent = `Replace ${csvInput.files[0].name}`;
+          chooseFileButton.classList.add('outlined-button');
+        } else {
+          calculateTithingButton.disabled = true;
+          chooseFileButton.textContent = 'Choose File';
+          chooseFileButton.classList.remove('outlined-button');
+        }
       }
     </script>
   </body>

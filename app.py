@@ -36,7 +36,7 @@ def results():
 @app.route('/process-csv', methods=['POST'])
 def process_csv():
     # Get FileStorage object from the request
-    uploaded_csv_file = request.files.get('transactions-csv')
+    uploaded_csv_file = request.files.get('csv-input')
 
     # Save csv to a temporary location
     tmp_csv = '/tmp/transaction_history.csv'
