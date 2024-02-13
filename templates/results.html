@@ -47,7 +47,6 @@
       }
 
       .results {
-        width: 100%;
         margin-bottom: 4rem;
       }
 
@@ -81,67 +80,69 @@
       <a href="/results" class="active">Results</a>
     </div>
     <main>
-      <div class="results">
-        {% if username %}
-        <div class="section username">
-          <h3>Username</h3>
-          <p>{{ username }}</p>
-        </div>
-        {% endif %} {% if time_range %}
-        <div class="section time-range">
-          <h3>Time Range</h3>
-          <p>{{ time_range }}</p>
-        </div>
-        {% endif %} {% if income_transactions %}
-        <div class="section income-transactions">
-          <h3>Income Transactions</h3>
-          <div class="table-container drop-shadow rounded-corners">
-            <table>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th class="right-align">Amount</th>
-                  <th>Payer</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for transaction in income_transactions %}
-                <tr>
-                  <td>{{ transaction.date }}</td>
-                  <td class="right-align">{{ transaction.amount_str }}</td>
-                  <td>{{ transaction.payer }}</td>
-                  <td>{{ transaction.description }}</td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
+      <div class="width-container">
+        <div class="results">
+          {% if username %}
+          <div class="section username">
+            <h3>Username</h3>
+            <p>{{ username }}</p>
           </div>
-        </div>
-        {% endif %} {% if total_income_str %}
-        <div class="section total-income">
-          <h3>Total Income</h3>
-          <p class="key-amount">{{ total_income_str }}</p>
-        </div>
-        {% endif %} {% if tithing_str %}
-        <div class="section tithing">
-          <h3>Tithing</h3>
-          <div class="tithing-line">
-            <p class="key-amount">{{ tithing_str }}</p>
-            <a
-              href="https://donations.churchofjesuschrist.org/donations/#/donation/step1"
-              target="_blank"
-            >
-              <button class="button white-button pay-tithing-button">
-                Pay tithing
-              </button>
-            </a>
+          {% endif %} {% if time_range %}
+          <div class="section time-range">
+            <h3>Time Range</h3>
+            <p>{{ time_range }}</p>
           </div>
+          {% endif %} {% if income_transactions %}
+          <div class="section income-transactions">
+            <h3>Income Transactions</h3>
+            <div class="table-container drop-shadow rounded-corners">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th class="right-align">Amount</th>
+                    <th>Payer</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for transaction in income_transactions %}
+                  <tr>
+                    <td>{{ transaction.date }}</td>
+                    <td class="right-align">{{ transaction.amount_str }}</td>
+                    <td>{{ transaction.payer }}</td>
+                    <td>{{ transaction.description }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          {% endif %} {% if total_income_str %}
+          <div class="section total-income">
+            <h3>Total Income</h3>
+            <p class="key-amount">{{ total_income_str }}</p>
+          </div>
+          {% endif %} {% if tithing_str %}
+          <div class="section tithing">
+            <h3>Tithing</h3>
+            <div class="tithing-line">
+              <p class="key-amount">{{ tithing_str }}</p>
+              <a
+                href="https://donations.churchofjesuschrist.org/donations/#/donation/step1"
+                target="_blank"
+              >
+                <button class="button white-button pay-tithing-button">
+                  Pay tithing
+                </button>
+              </a>
+            </div>
+          </div>
+          {% endif %}
         </div>
-        {% endif %}
-      </div>
-      <div>
-        <a href="{{ url_for('index') }}">Start Over</a>
+        <div>
+          <a href="{{ url_for('index') }}">Start Over</a>
+        </div>
       </div>
     </main>
   </body>
