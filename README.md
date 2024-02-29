@@ -39,3 +39,8 @@ While I was saddened to see that I couldn't achieve a fully automated solution, 
    ```
    python3 -m gunicorn -w 1 --bind 0.0.0.0:5002 wsgi:app --daemon
    ```
+
+### TODO
+
+- Add to portfolio
+- Add multiple csv upload
