@@ -2,10 +2,9 @@
 
 Automatically find out how much tithing you pay from your venmo income in just a few clicks.
 
-[![Venmo Tithing YouTube Video](https://img.youtube.com/vi/hZwowByqQ-g/0.jpg)](https://www.youtube.com/watch?v=hZwowByqQ-g)
+[Venmo Tithing YouTube Demo Video](https://www.youtube.com/watch?v=hZwowByqQ-g)
 
-[Venmo Tithing YouTube Video](https://www.youtube.com/watch?v=hZwowByqQ-g)
-
+[![Venmo Tithing YouTube Demo Video](https://img.youtube.com/vi/hZwowByqQ-g/0.jpg)](https://www.youtube.com/watch?v=hZwowByqQ-g)
 
 ### Usage
 
