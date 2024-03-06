@@ -10,6 +10,8 @@ Automatically find out how much tithing you pay from your venmo income in just a
 
 [venmo-tithing.brighambandersen.com](https://venmo-tithing.brighambandersen.com)
 
+If you're curious what your downloaded CSV should look like, see the [transactions_history.csv](./transactions_history.csv]) example in the root of this project.
+
 ### Motivation for Project
 
 I love doing coding projects that actually have real-world application. Even if they're small projects, I love being able to help family, friends, and anyone who is in need of a solution that can be solved via code. My mom approached me one day, saying it was frustrating to figure out how much tithing she owed on her nannying job. She receives her pay via Venmo, and she typically would do things old school where she'd pull up the Venmo app, then manually write down all the times where she made money on a sheet of paper, manually write tally up the totals, then take 10% of that and figure out tithing. When I heard this I really wanted to come up with a solution to keep her from having to do all that grunt work!
