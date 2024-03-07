@@ -12,7 +12,7 @@ Automatically find out how much tithing you pay from your venmo income in just a
 touch .env
 ```
 
-Make sure to fill `.env` with correct contents (see [`.env.example`](/.env.example)).
+> Make sure to fill `.env` with correct contents (see [`.env.example`](/.env.example)).
 
 Run flask
 
