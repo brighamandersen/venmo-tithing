@@ -6,27 +6,22 @@ Automatically find out how much tithing you pay from your venmo income in just a
 
 [Watch Demo on YouTube](https://www.youtube.com/watch?v=hZwowByqQ-g)
 
-## Installation and Setup
+## Installation
 
 ```
 touch .env
+python app.py
 ```
 
 > Make sure to fill `.env` with correct contents (see [`.env.example`](/.env.example)).
 
-Run flask
-
-In development
+## Production Setup
 
 ```
- python app.py
+pm2 start pm2.json
 ```
 
-In prod on a server that runs constantly (you can change the port as needed)
-
-```
-python3 -m gunicorn -w 1 --bind 0.0.0.0:5002 wsgi:app --daemon
-```
+Behind the scenes this runs `python3 -m gunicorn -w 1 --bind 0.0.0.0:5002 wsgi:app`. This runs the app with gunicorn on the right port, then pm2 manages it, handling automatic restarts. `-w 1` means just use 1 worker process (doing this because I have only 1 CPU on the virtual server). If you try to run gunicorn without pm2 and want it in the background, you'll need to add the `--daemon` flag.
 
 ## Usage
 
