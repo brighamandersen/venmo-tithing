@@ -1,0 +1,6 @@
+{
+  "apps": {
+    "name": "venmo-tithing",
+    "script": "python3 -m gunicorn -w 1 --bind 0.0.0.0:5002 wsgi:app"
+  }
+}
