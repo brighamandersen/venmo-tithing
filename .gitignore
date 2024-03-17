@@ -1,2 +1,3 @@
 __pycache__
 .env
+pm2.log
