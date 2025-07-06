@@ -1,6 +1,6 @@
 # Venmo Tithing Calculator 💰
 
-Automatically find out how much tithing you pay from your venmo income in just a few clicks.
+Automatically find out how much tithing you pay from your venmo income in just a few clicks! My mom came to me, tired of manually tallying up her income from Venmo by hand, then calculating the tithing on it. I made this site to automate that whole process. Uses Flask with HTML and CSS.
 
 [![Venmo Tithing YouTube Demo Video](https://img.youtube.com/vi/hZwowByqQ-g/0.jpg)](https://www.youtube.com/watch?v=hZwowByqQ-g)
 
