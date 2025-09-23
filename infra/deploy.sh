@@ -1,17 +1,17 @@
 #!/bin/bash
 set -euo pipefail
 
-echo "Deploying insight"
+echo "Deploying venmo-tithing"
 
-sudo ln -sf /home/brig/code/no-end-insight/infra/systemd/insight.service /etc/systemd/system/insight.service
+sudo ln -sf /home/brig/code/venmo-tithing/infra/systemd/venmo-tithing.service /etc/systemd/system/venmo-tithing.service
 
-sudo ln -sf /home/brig/code/no-end-insight/infra/nginx/insight.conf /etc/nginx/conf.d/insight.conf
+sudo ln -sf /home/brig/code/venmo-tithing/infra/nginx/venmo-tithing.conf /etc/nginx/conf.d/venmo-tithing.conf
 
 sudo systemctl daemon-reload
-sudo systemctl enable insight.service
-sudo systemctl restart insight.service
+sudo systemctl enable venmo-tithing.service
+sudo systemctl restart venmo-tithing.service
 
 sudo nginx -t
 sudo systemctl reload nginx
 
-echo "Deployment complete for insight"
+echo "Deployment complete for venmo-tithing"
