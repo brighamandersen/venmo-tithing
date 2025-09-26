@@ -55,9 +55,9 @@ pip install -r requirements.txt
 python app.py
 ```
 
-### Usage/deployment to production
+### Deploying to Production
 
-```
+```bash
 cd path/to/repo
 ./deploy/deploy.sh
 ```
