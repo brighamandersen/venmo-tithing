@@ -3,10 +3,10 @@ Description=venmo-tithing
 After=network.target
 
 [Service]
-User=www-data
-Group=www-data
+User=brig
+Group=brig
 WorkingDirectory=/home/brig/code/venmo-tithing
-ExecStart=/home/brig/code/venmo-tithing/.venv/bin/python3 -m gunicorn -w 1 --bind 0.0.0.0:3005 wsgi:app
+ExecStart=/home/brig/code/venmo-tithing/.venv/bin/python3 -m gunicorn -w 1 --bind 0.0.0.0:3004 wsgi:app
 Restart=always
 RestartSec=5
 Environment="PATH=/home/brig/code/venmo-tithing/.venv/bin:$PATH"
