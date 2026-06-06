@@ -5,14 +5,14 @@ echo "Deploying venmo-tithing"
 
 # nginx
 
-sudo cp /home/brig/code/venmo-tithing/deploy/nginx.conf /etc/nginx/conf.d/venmo-tithing.conf
+sudo cp /home/brig/dev/venmo-tithing/deploy/nginx.conf /etc/nginx/conf.d/venmo-tithing.conf
 
 sudo nginx -t
 sudo systemctl reload nginx
 
 # systemd
 
-sudo cp /home/brig/code/venmo-tithing/deploy/systemd.service /etc/systemd/system/venmo-tithing.service
+sudo cp /home/brig/dev/venmo-tithing/deploy/systemd.service /etc/systemd/system/venmo-tithing.service
 
 sudo systemctl daemon-reload
 sudo systemctl enable venmo-tithing.service
