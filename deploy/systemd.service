@@ -5,8 +5,8 @@ After=network.target
 [Service]
 User=brig
 Group=brig
-WorkingDirectory=/home/brig/code/venmo-tithing
-ExecStart=/home/brig/code/venmo-tithing/.venv/bin/python3 -m gunicorn -w 1 --bind 0.0.0.0:3004 wsgi:app
+WorkingDirectory=/home/brig/dev/venmo-tithing
+ExecStart=/home/brig/dev/venmo-tithing/.venv/bin/python3 -m gunicorn -w 1 --bind 0.0.0.0:3004 wsgi:app
 Restart=always
 RestartSec=5
 
