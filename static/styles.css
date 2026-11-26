@@ -7,19 +7,23 @@
 }
 
 @font-face {
-  font-family: 'Ronnia Extrabold Italic';
-  src: url('https://db.onlinewebfonts.com/t/da33c3569757096031afceba6d88ec03.woff')
-    format('woff');
+  font-family: 'Nunito Sans';
+  src: url('fonts/nunito-sans-900-italic.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: 'Scto Grotesk A';
-  src: url('https://db.onlinewebfonts.com/t/c1dadd1119436dde0f9ab3c947d1e62f.woff')
-    format('woff');
+  font-family: 'Inter';
+  src: url('fonts/inter-variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 html {
-  font-family: 'Scto Grotesk A';
+  font-family: 'Inter', sans-serif;
   background-color: var(--primary-light);
 }
 
@@ -28,12 +32,25 @@ body {
 }
 
 h1 {
-  font-family: 'Ronnia Extrabold Italic';
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 900;
+  font-style: italic;
   color: var(--primary);
 }
 
 h3 {
   color: var(--dark-gray);
+  font-weight: 500;
+}
+
+h3 code {
+  font-family: Menlo, Consolas, monospace;
+  font-size: 0.95em;
+}
+
+h3 a,
+.breadcrumbs a {
+  font-weight: 500;
 }
 
 .navbar {
@@ -50,11 +67,11 @@ h3 {
 }
 
 main {
-  padding: 2rem;
+  padding: 0.5rem 2rem 2rem;
 }
 
 .width-container {
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
@@ -64,6 +81,7 @@ input[type='file']::file-selector-button {
   color: white;
   padding: 1rem 2rem;
   border: none;
+  font-family: inherit;
   font-size: 18px;
   border-radius: 2rem;
   transition: background-color 0.5s ease;
@@ -93,7 +111,7 @@ input[type='file']::file-selector-button {
 a {
   color: var(--primary);
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 a:hover {
@@ -114,6 +132,7 @@ a:hover {
 }
 
 .breadcrumbs {
+  font-size: 1.25rem;
   padding: 1rem 0;
   margin: 0 2rem;
   color: var(--dark-gray);
@@ -123,5 +142,5 @@ a:hover {
 .breadcrumbs a.active {
   pointer-events: none;
   color: var(--dark-gray);
-  font-weight: bold;
+  font-weight: 500;
 }
